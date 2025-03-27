@@ -1,0 +1,19 @@
+public class FileInput : IInputDevice
+{
+    private readonly Queue<Buffer> filePages;
+
+    public FileInput(List<string> content)
+    {
+        filePages = new Queue<Buffer>(content.ConvertAll(p => new Buffer(p)));
+    }
+
+    public Buffer ReadPage()
+    {
+        return filePages.Count > 0 ? filePages.Dequeue() : null;
+    }
+
+    public bool IsEndOfInput(Buffer page)
+    {
+        return page == null;
+    }
+}
