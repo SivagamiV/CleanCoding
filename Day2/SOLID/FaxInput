@@ -1,0 +1,19 @@
+public class FaxInput : IInputDevice
+{
+    private readonly Queue<Buffer> faxPages;
+
+    public FaxInput(List<string> faxes)
+    {
+        faxPages = new Queue<Buffer>(faxes.ConvertAll(p => new Buffer(p)));
+    }
+
+    public Buffer ReadPage()
+    {
+        return faxPages.Count > 0 ? faxPages.Dequeue() : null;
+    }
+
+    public bool IsEndOfInput(Buffer page)
+    {
+        return page == null;
+    }
+}
