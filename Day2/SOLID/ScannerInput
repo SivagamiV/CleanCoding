@@ -1,15 +1,15 @@
 public class ScannerInput : IInputDevice
 {
-    private readonly Queue<Buffer> _scannedPages;
+    private readonly Queue<Buffer> scannedPages;
 
     public ScannerInput(List<string> scans)
     {
-        _scannedPages = new Queue<Buffer>(scans.ConvertAll(p => new Buffer(p)));
+        scannedPages = new Queue<Buffer>(scans.ConvertAll(p => new Buffer(p)));
     }
 
     public Buffer ReadPage()
     {
-        return _scannedPages.Count > 0 ? _scannedPages.Dequeue() : null;
+        return scannedPages.Count > 0 ? scannedPages.Dequeue() : null;
     }
 
     public bool IsEndOfInput(Buffer page)
