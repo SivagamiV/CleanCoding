@@ -1,0 +1,21 @@
+public class PrinterDriver
+{
+    private readonly IInputDevice inputDevice;
+    private readonly IPrinter printer;
+
+    public PrinterDriver(IInputDevice inputDevice, IPrinter printer)
+    {
+        inputDevice = inputDevice;
+        printer = printer;
+    }
+
+    public void Print()
+    {
+        Buffer page = inputDevice.ReadPage();
+        while (!inputDevice.IsEndOfInput(page))
+        {
+            printer.Print(page);
+            page = inputDevice.ReadPage();
+        }
+    }
+}
